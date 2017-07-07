@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yigou.mapper.SequenceMapper">
+	<select id="getSequence" resultType="Integer" parameterType="String">
+		select sequence from sys_seq where seq_name=#{seqName} for UPDATE
+	</select>
+	
+	<update id="updateSequence" parameterType="Map">
+		update sys_seq set sequence=#{sequence} where seq_name=#{seqName}
+	</update>
+	
+	<insert id="addSequence" parameterType="Map">
+		insert into sys_seq(seq_name,sequence) values(#{seqName},#{sequence})
+	</insert>
+</mapper> 

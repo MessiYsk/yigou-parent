@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yigou.mapper.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.yigou.model.entity.Product" >
+    <id column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="product_no" property="productNo" jdbcType="VARCHAR" />
+    <result column="cate" property="cate" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="is_show" property="isShow" jdbcType="BIT" />
+    <result column="is_sn" property="isSn" jdbcType="BIT" />
+    <result column="is_virtual" property="isVirtual" jdbcType="BIT" />
+    <result column="sn_len" property="snLen" jdbcType="INTEGER" />
+    <result column="displayorder" property="displayorder" jdbcType="BIT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="is_new" property="isNew" jdbcType="BIT" />
+    <result column="is_hot" property="isHot" jdbcType="BIT" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="banner_url" property="bannerUrl" jdbcType="VARCHAR" />
+    <result column="brand_id" property="brandId" jdbcType="VARCHAR" />
+    <result column="brand_name" property="brandName" jdbcType="VARCHAR" />
+    <result column="product_price" property="productPrice" jdbcType="DECIMAL" />
+    <result column="mall_nav" property="mallNav" jdbcType="INTEGER" />
+    <result column="is_valid" property="isValid" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.yigou.model.entity.Product" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    product_id, product_no, cate, model, is_show, is_sn, is_virtual, sn_len, displayorder, 
+    description, is_new, is_hot, createtime, image_url, banner_url, brand_id, brand_name, 
+    product_price, mall_nav, is_valid
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.yigou.model.entity.ProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yigou.model.entity.ProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_product
+    where product_id = #{productId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_product
+    where product_id = #{productId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yigou.model.entity.ProductExample" >
+    delete from tb_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yigou.model.entity.Product" useGeneratedKeys="true" keyProperty="productId">
+    insert into tb_product (product_id, product_no, cate, 
+      model, is_show, is_sn, is_virtual, 
+      sn_len, displayorder, description, 
+      is_new, is_hot, createtime, 
+      image_url, banner_url, brand_id, 
+      brand_name, product_price, mall_nav, 
+      is_valid, content)
+    values (#{productId,jdbcType=INTEGER}, #{productNo,jdbcType=VARCHAR}, #{cate,jdbcType=VARCHAR}, 
+      #{model,jdbcType=VARCHAR}, #{isShow,jdbcType=BIT}, #{isSn,jdbcType=BIT}, #{isVirtual,jdbcType=BIT}, 
+      #{snLen,jdbcType=INTEGER}, #{displayorder,jdbcType=BIT}, #{description,jdbcType=VARCHAR}, 
+      #{isNew,jdbcType=BIT}, #{isHot,jdbcType=BIT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{imageUrl,jdbcType=VARCHAR}, #{bannerUrl,jdbcType=VARCHAR}, #{brandId,jdbcType=VARCHAR}, 
+      #{brandName,jdbcType=VARCHAR}, #{productPrice,jdbcType=DECIMAL}, #{mallNav,jdbcType=INTEGER}, 
+      #{isValid,jdbcType=BIT}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yigou.model.entity.Product" useGeneratedKeys="true" keyProperty="productId">
+    insert into tb_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="productNo != null" >
+        product_no,
+      </if>
+      <if test="cate != null" >
+        cate,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="isShow != null" >
+        is_show,
+      </if>
+      <if test="isSn != null" >
+        is_sn,
+      </if>
+      <if test="isVirtual != null" >
+        is_virtual,
+      </if>
+      <if test="snLen != null" >
+        sn_len,
+      </if>
+      <if test="displayorder != null" >
+        displayorder,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="isNew != null" >
+        is_new,
+      </if>
+      <if test="isHot != null" >
+        is_hot,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="imageUrl != null" >
+        image_url,
+      </if>
+      <if test="bannerUrl != null" >
+        banner_url,
+      </if>
+      <if test="brandId != null" >
+        brand_id,
+      </if>
+      <if test="brandName != null" >
+        brand_name,
+      </if>
+      <if test="productPrice != null" >
+        product_price,
+      </if>
+      <if test="mallNav != null" >
+        mall_nav,
+      </if>
+      <if test="isValid != null" >
+        is_valid,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="productNo != null" >
+        #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cate != null" >
+        #{cate,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null" >
+        #{isShow,jdbcType=BIT},
+      </if>
+      <if test="isSn != null" >
+        #{isSn,jdbcType=BIT},
+      </if>
+      <if test="isVirtual != null" >
+        #{isVirtual,jdbcType=BIT},
+      </if>
+      <if test="snLen != null" >
+        #{snLen,jdbcType=INTEGER},
+      </if>
+      <if test="displayorder != null" >
+        #{displayorder,jdbcType=BIT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="isNew != null" >
+        #{isNew,jdbcType=BIT},
+      </if>
+      <if test="isHot != null" >
+        #{isHot,jdbcType=BIT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerUrl != null" >
+        #{bannerUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null" >
+        #{brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null" >
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrice != null" >
+        #{productPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="mallNav != null" >
+        #{mallNav,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null" >
+        #{isValid,jdbcType=BIT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yigou.model.entity.ProductExample" resultType="java.lang.Integer" >
+    select count(*) from tb_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_product
+    <set >
+      <if test="record.productId != null" >
+        product_id = #{record.productId,jdbcType=INTEGER},
+      </if>
+      <if test="record.productNo != null" >
+        product_no = #{record.productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cate != null" >
+        cate = #{record.cate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null" >
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isShow != null" >
+        is_show = #{record.isShow,jdbcType=BIT},
+      </if>
+      <if test="record.isSn != null" >
+        is_sn = #{record.isSn,jdbcType=BIT},
+      </if>
+      <if test="record.isVirtual != null" >
+        is_virtual = #{record.isVirtual,jdbcType=BIT},
+      </if>
+      <if test="record.snLen != null" >
+        sn_len = #{record.snLen,jdbcType=INTEGER},
+      </if>
+      <if test="record.displayorder != null" >
+        displayorder = #{record.displayorder,jdbcType=BIT},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isNew != null" >
+        is_new = #{record.isNew,jdbcType=BIT},
+      </if>
+      <if test="record.isHot != null" >
+        is_hot = #{record.isHot,jdbcType=BIT},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.imageUrl != null" >
+        image_url = #{record.imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bannerUrl != null" >
+        banner_url = #{record.bannerUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandId != null" >
+        brand_id = #{record.brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandName != null" >
+        brand_name = #{record.brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productPrice != null" >
+        product_price = #{record.productPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mallNav != null" >
+        mall_nav = #{record.mallNav,jdbcType=INTEGER},
+      </if>
+      <if test="record.isValid != null" >
+        is_valid = #{record.isValid,jdbcType=BIT},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_product
+    set product_id = #{record.productId,jdbcType=INTEGER},
+      product_no = #{record.productNo,jdbcType=VARCHAR},
+      cate = #{record.cate,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      is_show = #{record.isShow,jdbcType=BIT},
+      is_sn = #{record.isSn,jdbcType=BIT},
+      is_virtual = #{record.isVirtual,jdbcType=BIT},
+      sn_len = #{record.snLen,jdbcType=INTEGER},
+      displayorder = #{record.displayorder,jdbcType=BIT},
+      description = #{record.description,jdbcType=VARCHAR},
+      is_new = #{record.isNew,jdbcType=BIT},
+      is_hot = #{record.isHot,jdbcType=BIT},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      image_url = #{record.imageUrl,jdbcType=VARCHAR},
+      banner_url = #{record.bannerUrl,jdbcType=VARCHAR},
+      brand_id = #{record.brandId,jdbcType=VARCHAR},
+      brand_name = #{record.brandName,jdbcType=VARCHAR},
+      product_price = #{record.productPrice,jdbcType=DECIMAL},
+      mall_nav = #{record.mallNav,jdbcType=INTEGER},
+      is_valid = #{record.isValid,jdbcType=BIT},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_product
+    set product_id = #{record.productId,jdbcType=INTEGER},
+      product_no = #{record.productNo,jdbcType=VARCHAR},
+      cate = #{record.cate,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      is_show = #{record.isShow,jdbcType=BIT},
+      is_sn = #{record.isSn,jdbcType=BIT},
+      is_virtual = #{record.isVirtual,jdbcType=BIT},
+      sn_len = #{record.snLen,jdbcType=INTEGER},
+      displayorder = #{record.displayorder,jdbcType=BIT},
+      description = #{record.description,jdbcType=VARCHAR},
+      is_new = #{record.isNew,jdbcType=BIT},
+      is_hot = #{record.isHot,jdbcType=BIT},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      image_url = #{record.imageUrl,jdbcType=VARCHAR},
+      banner_url = #{record.bannerUrl,jdbcType=VARCHAR},
+      brand_id = #{record.brandId,jdbcType=VARCHAR},
+      brand_name = #{record.brandName,jdbcType=VARCHAR},
+      product_price = #{record.productPrice,jdbcType=DECIMAL},
+      mall_nav = #{record.mallNav,jdbcType=INTEGER},
+      is_valid = #{record.isValid,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yigou.model.entity.Product" >
+    update tb_product
+    <set >
+      <if test="productNo != null" >
+        product_no = #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cate != null" >
+        cate = #{cate,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null" >
+        is_show = #{isShow,jdbcType=BIT},
+      </if>
+      <if test="isSn != null" >
+        is_sn = #{isSn,jdbcType=BIT},
+      </if>
+      <if test="isVirtual != null" >
+        is_virtual = #{isVirtual,jdbcType=BIT},
+      </if>
+      <if test="snLen != null" >
+        sn_len = #{snLen,jdbcType=INTEGER},
+      </if>
+      <if test="displayorder != null" >
+        displayorder = #{displayorder,jdbcType=BIT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="isNew != null" >
+        is_new = #{isNew,jdbcType=BIT},
+      </if>
+      <if test="isHot != null" >
+        is_hot = #{isHot,jdbcType=BIT},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imageUrl != null" >
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerUrl != null" >
+        banner_url = #{bannerUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null" >
+        brand_id = #{brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null" >
+        brand_name = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrice != null" >
+        product_price = #{productPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="mallNav != null" >
+        mall_nav = #{mallNav,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null" >
+        is_valid = #{isValid,jdbcType=BIT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yigou.model.entity.Product" >
+    update tb_product
+    set product_no = #{productNo,jdbcType=VARCHAR},
+      cate = #{cate,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      is_show = #{isShow,jdbcType=BIT},
+      is_sn = #{isSn,jdbcType=BIT},
+      is_virtual = #{isVirtual,jdbcType=BIT},
+      sn_len = #{snLen,jdbcType=INTEGER},
+      displayorder = #{displayorder,jdbcType=BIT},
+      description = #{description,jdbcType=VARCHAR},
+      is_new = #{isNew,jdbcType=BIT},
+      is_hot = #{isHot,jdbcType=BIT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      banner_url = #{bannerUrl,jdbcType=VARCHAR},
+      brand_id = #{brandId,jdbcType=VARCHAR},
+      brand_name = #{brandName,jdbcType=VARCHAR},
+      product_price = #{productPrice,jdbcType=DECIMAL},
+      mall_nav = #{mallNav,jdbcType=INTEGER},
+      is_valid = #{isValid,jdbcType=BIT},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yigou.model.entity.Product" >
+    update tb_product
+    set product_no = #{productNo,jdbcType=VARCHAR},
+      cate = #{cate,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      is_show = #{isShow,jdbcType=BIT},
+      is_sn = #{isSn,jdbcType=BIT},
+      is_virtual = #{isVirtual,jdbcType=BIT},
+      sn_len = #{snLen,jdbcType=INTEGER},
+      displayorder = #{displayorder,jdbcType=BIT},
+      description = #{description,jdbcType=VARCHAR},
+      is_new = #{isNew,jdbcType=BIT},
+      is_hot = #{isHot,jdbcType=BIT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      banner_url = #{bannerUrl,jdbcType=VARCHAR},
+      brand_id = #{brandId,jdbcType=VARCHAR},
+      brand_name = #{brandName,jdbcType=VARCHAR},
+      product_price = #{productPrice,jdbcType=DECIMAL},
+      mall_nav = #{mallNav,jdbcType=INTEGER},
+      is_valid = #{isValid,jdbcType=BIT}
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+</mapper>

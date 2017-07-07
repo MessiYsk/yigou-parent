@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/eureka/eureka.iml" filepath="$PROJECT_DIR$/eureka/eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yigou-common/yigou-common.iml" filepath="$PROJECT_DIR$/yigou-common/yigou-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yigou-config-client/yigou-config-client.iml" filepath="$PROJECT_DIR$/yigou-config-client/yigou-config-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yigou-config-server/yigou-config-server.iml" filepath="$PROJECT_DIR$/yigou-config-server/yigou-config-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yigou-eureka-server/yigou-eureka-server.iml" filepath="$PROJECT_DIR$/yigou-eureka-server/yigou-eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yigou-goods/yigou-goods.iml" filepath="$PROJECT_DIR$/yigou-goods/yigou-goods.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yigou-parent.iml" filepath="$PROJECT_DIR$/yigou-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yigou-zuul/yigou-zuul.iml" filepath="$PROJECT_DIR$/yigou-zuul/yigou-zuul.iml" />
+    </modules>
+  </component>
+</project>

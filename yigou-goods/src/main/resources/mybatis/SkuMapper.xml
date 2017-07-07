@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yigou.mapper.SkuMapper" >
+  <resultMap id="BaseResultMap" type="com.yigou.model.entity.Sku" >
+    <id column="sp_id" property="spId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="fullname" property="fullname" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="ct_id" property="ctId" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="config" property="config" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="isch" property="isch" jdbcType="VARCHAR" />
+    <result column="chcd" property="chcd" jdbcType="INTEGER" />
+    <result column="kc_max" property="kcMax" jdbcType="INTEGER" />
+    <result column="kc_min" property="kcMin" jdbcType="INTEGER" />
+    <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="xnsp_profit" property="xnspProfit" jdbcType="REAL" />
+    <result column="inventory" property="inventory" jdbcType="INTEGER" />
+    <result column="spec_data" property="specData" jdbcType="VARCHAR" />
+    <result column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="weight" property="weight" jdbcType="REAL" />
+    <result column="wunit" property="wunit" jdbcType="VARCHAR" />
+    <result column="volume" property="volume" jdbcType="REAL" />
+    <result column="vUnit" property="vunit" jdbcType="VARCHAR" />
+    <result column="length" property="length" jdbcType="REAL" />
+    <result column="width" property="width" jdbcType="REAL" />
+    <result column="lUnit" property="lunit" jdbcType="VARCHAR" />
+    <result column="height" property="height" jdbcType="REAL" />
+    <result column="package_type" property="packageType" jdbcType="INTEGER" />
+    <result column="expDate_flag" property="expdateFlag" jdbcType="BIT" />
+    <result column="expiration_date" property="expirationDate" jdbcType="TIMESTAMP" />
+    <result column="batchNo_flag" property="batchnoFlag" jdbcType="BIT" />
+    <result column="warmline" property="warmline" jdbcType="INTEGER" />
+    <result column="security_code_flag" property="securityCodeFlag" jdbcType="BIT" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sp_id, name, fullname, code, ct_id, brand, config, note, status, type, color, isch, 
+    chcd, kc_max, kc_min, image_url, xnsp_profit, inventory, spec_data, product_id, weight, 
+    wunit, volume, vUnit, length, width, lUnit, height, package_type, expDate_flag, expiration_date, 
+    batchNo_flag, warmline, security_code_flag, createtime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yigou.model.entity.SkuExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from basis_spxx
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from basis_spxx
+    where sp_id = #{spId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from basis_spxx
+    where sp_id = #{spId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yigou.model.entity.SkuExample" >
+    delete from basis_spxx
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yigou.model.entity.Sku" >
+    insert into basis_spxx (sp_id, name, fullname, 
+      code, ct_id, brand, 
+      config, note, status, 
+      type, color, isch, 
+      chcd, kc_max, kc_min, 
+      image_url, xnsp_profit, inventory, 
+      spec_data, product_id, weight, 
+      wunit, volume, vUnit, 
+      length, width, lUnit, height, 
+      package_type, expDate_flag, expiration_date, 
+      batchNo_flag, warmline, security_code_flag, 
+      createtime)
+    values (#{spId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{fullname,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{ctId,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, 
+      #{config,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, #{isch,jdbcType=VARCHAR}, 
+      #{chcd,jdbcType=INTEGER}, #{kcMax,jdbcType=INTEGER}, #{kcMin,jdbcType=INTEGER}, 
+      #{imageUrl,jdbcType=VARCHAR}, #{xnspProfit,jdbcType=REAL}, #{inventory,jdbcType=INTEGER}, 
+      #{specData,jdbcType=VARCHAR}, #{productId,jdbcType=INTEGER}, #{weight,jdbcType=REAL}, 
+      #{wunit,jdbcType=VARCHAR}, #{volume,jdbcType=REAL}, #{vunit,jdbcType=VARCHAR}, 
+      #{length,jdbcType=REAL}, #{width,jdbcType=REAL}, #{lunit,jdbcType=VARCHAR}, #{height,jdbcType=REAL}, 
+      #{packageType,jdbcType=INTEGER}, #{expdateFlag,jdbcType=BIT}, #{expirationDate,jdbcType=TIMESTAMP}, 
+      #{batchnoFlag,jdbcType=BIT}, #{warmline,jdbcType=INTEGER}, #{securityCodeFlag,jdbcType=BIT}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yigou.model.entity.Sku" >
+    insert into basis_spxx
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="spId != null" >
+        sp_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="fullname != null" >
+        fullname,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="ctId != null" >
+        ct_id,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="config != null" >
+        config,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="color != null" >
+        color,
+      </if>
+      <if test="isch != null" >
+        isch,
+      </if>
+      <if test="chcd != null" >
+        chcd,
+      </if>
+      <if test="kcMax != null" >
+        kc_max,
+      </if>
+      <if test="kcMin != null" >
+        kc_min,
+      </if>
+      <if test="imageUrl != null" >
+        image_url,
+      </if>
+      <if test="xnspProfit != null" >
+        xnsp_profit,
+      </if>
+      <if test="inventory != null" >
+        inventory,
+      </if>
+      <if test="specData != null" >
+        spec_data,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="wunit != null" >
+        wunit,
+      </if>
+      <if test="volume != null" >
+        volume,
+      </if>
+      <if test="vunit != null" >
+        vUnit,
+      </if>
+      <if test="length != null" >
+        length,
+      </if>
+      <if test="width != null" >
+        width,
+      </if>
+      <if test="lunit != null" >
+        lUnit,
+      </if>
+      <if test="height != null" >
+        height,
+      </if>
+      <if test="packageType != null" >
+        package_type,
+      </if>
+      <if test="expdateFlag != null" >
+        expDate_flag,
+      </if>
+      <if test="expirationDate != null" >
+        expiration_date,
+      </if>
+      <if test="batchnoFlag != null" >
+        batchNo_flag,
+      </if>
+      <if test="warmline != null" >
+        warmline,
+      </if>
+      <if test="securityCodeFlag != null" >
+        security_code_flag,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="spId != null" >
+        #{spId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fullname != null" >
+        #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="ctId != null" >
+        #{ctId,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="config != null" >
+        #{config,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null" >
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="isch != null" >
+        #{isch,jdbcType=VARCHAR},
+      </if>
+      <if test="chcd != null" >
+        #{chcd,jdbcType=INTEGER},
+      </if>
+      <if test="kcMax != null" >
+        #{kcMax,jdbcType=INTEGER},
+      </if>
+      <if test="kcMin != null" >
+        #{kcMin,jdbcType=INTEGER},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="xnspProfit != null" >
+        #{xnspProfit,jdbcType=REAL},
+      </if>
+      <if test="inventory != null" >
+        #{inventory,jdbcType=INTEGER},
+      </if>
+      <if test="specData != null" >
+        #{specData,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=REAL},
+      </if>
+      <if test="wunit != null" >
+        #{wunit,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null" >
+        #{volume,jdbcType=REAL},
+      </if>
+      <if test="vunit != null" >
+        #{vunit,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null" >
+        #{length,jdbcType=REAL},
+      </if>
+      <if test="width != null" >
+        #{width,jdbcType=REAL},
+      </if>
+      <if test="lunit != null" >
+        #{lunit,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null" >
+        #{height,jdbcType=REAL},
+      </if>
+      <if test="packageType != null" >
+        #{packageType,jdbcType=INTEGER},
+      </if>
+      <if test="expdateFlag != null" >
+        #{expdateFlag,jdbcType=BIT},
+      </if>
+      <if test="expirationDate != null" >
+        #{expirationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="batchnoFlag != null" >
+        #{batchnoFlag,jdbcType=BIT},
+      </if>
+      <if test="warmline != null" >
+        #{warmline,jdbcType=INTEGER},
+      </if>
+      <if test="securityCodeFlag != null" >
+        #{securityCodeFlag,jdbcType=BIT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yigou.model.entity.SkuExample" resultType="java.lang.Integer" >
+    select count(*) from basis_spxx
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update basis_spxx
+    <set >
+      <if test="record.spId != null" >
+        sp_id = #{record.spId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fullname != null" >
+        fullname = #{record.fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctId != null" >
+        ct_id = #{record.ctId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brand != null" >
+        brand = #{record.brand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.config != null" >
+        config = #{record.config,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null" >
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isch != null" >
+        isch = #{record.isch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chcd != null" >
+        chcd = #{record.chcd,jdbcType=INTEGER},
+      </if>
+      <if test="record.kcMax != null" >
+        kc_max = #{record.kcMax,jdbcType=INTEGER},
+      </if>
+      <if test="record.kcMin != null" >
+        kc_min = #{record.kcMin,jdbcType=INTEGER},
+      </if>
+      <if test="record.imageUrl != null" >
+        image_url = #{record.imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xnspProfit != null" >
+        xnsp_profit = #{record.xnspProfit,jdbcType=REAL},
+      </if>
+      <if test="record.inventory != null" >
+        inventory = #{record.inventory,jdbcType=INTEGER},
+      </if>
+      <if test="record.specData != null" >
+        spec_data = #{record.specData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productId != null" >
+        product_id = #{record.productId,jdbcType=INTEGER},
+      </if>
+      <if test="record.weight != null" >
+        weight = #{record.weight,jdbcType=REAL},
+      </if>
+      <if test="record.wunit != null" >
+        wunit = #{record.wunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.volume != null" >
+        volume = #{record.volume,jdbcType=REAL},
+      </if>
+      <if test="record.vunit != null" >
+        vUnit = #{record.vunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.length != null" >
+        length = #{record.length,jdbcType=REAL},
+      </if>
+      <if test="record.width != null" >
+        width = #{record.width,jdbcType=REAL},
+      </if>
+      <if test="record.lunit != null" >
+        lUnit = #{record.lunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.height != null" >
+        height = #{record.height,jdbcType=REAL},
+      </if>
+      <if test="record.packageType != null" >
+        package_type = #{record.packageType,jdbcType=INTEGER},
+      </if>
+      <if test="record.expdateFlag != null" >
+        expDate_flag = #{record.expdateFlag,jdbcType=BIT},
+      </if>
+      <if test="record.expirationDate != null" >
+        expiration_date = #{record.expirationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.batchnoFlag != null" >
+        batchNo_flag = #{record.batchnoFlag,jdbcType=BIT},
+      </if>
+      <if test="record.warmline != null" >
+        warmline = #{record.warmline,jdbcType=INTEGER},
+      </if>
+      <if test="record.securityCodeFlag != null" >
+        security_code_flag = #{record.securityCodeFlag,jdbcType=BIT},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update basis_spxx
+    set sp_id = #{record.spId,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      fullname = #{record.fullname,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      ct_id = #{record.ctId,jdbcType=VARCHAR},
+      brand = #{record.brand,jdbcType=VARCHAR},
+      config = #{record.config,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      isch = #{record.isch,jdbcType=VARCHAR},
+      chcd = #{record.chcd,jdbcType=INTEGER},
+      kc_max = #{record.kcMax,jdbcType=INTEGER},
+      kc_min = #{record.kcMin,jdbcType=INTEGER},
+      image_url = #{record.imageUrl,jdbcType=VARCHAR},
+      xnsp_profit = #{record.xnspProfit,jdbcType=REAL},
+      inventory = #{record.inventory,jdbcType=INTEGER},
+      spec_data = #{record.specData,jdbcType=VARCHAR},
+      product_id = #{record.productId,jdbcType=INTEGER},
+      weight = #{record.weight,jdbcType=REAL},
+      wunit = #{record.wunit,jdbcType=VARCHAR},
+      volume = #{record.volume,jdbcType=REAL},
+      vUnit = #{record.vunit,jdbcType=VARCHAR},
+      length = #{record.length,jdbcType=REAL},
+      width = #{record.width,jdbcType=REAL},
+      lUnit = #{record.lunit,jdbcType=VARCHAR},
+      height = #{record.height,jdbcType=REAL},
+      package_type = #{record.packageType,jdbcType=INTEGER},
+      expDate_flag = #{record.expdateFlag,jdbcType=BIT},
+      expiration_date = #{record.expirationDate,jdbcType=TIMESTAMP},
+      batchNo_flag = #{record.batchnoFlag,jdbcType=BIT},
+      warmline = #{record.warmline,jdbcType=INTEGER},
+      security_code_flag = #{record.securityCodeFlag,jdbcType=BIT},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yigou.model.entity.Sku" >
+    update basis_spxx
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fullname != null" >
+        fullname = #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="ctId != null" >
+        ct_id = #{ctId,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="config != null" >
+        config = #{config,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null" >
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="isch != null" >
+        isch = #{isch,jdbcType=VARCHAR},
+      </if>
+      <if test="chcd != null" >
+        chcd = #{chcd,jdbcType=INTEGER},
+      </if>
+      <if test="kcMax != null" >
+        kc_max = #{kcMax,jdbcType=INTEGER},
+      </if>
+      <if test="kcMin != null" >
+        kc_min = #{kcMin,jdbcType=INTEGER},
+      </if>
+      <if test="imageUrl != null" >
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="xnspProfit != null" >
+        xnsp_profit = #{xnspProfit,jdbcType=REAL},
+      </if>
+      <if test="inventory != null" >
+        inventory = #{inventory,jdbcType=INTEGER},
+      </if>
+      <if test="specData != null" >
+        spec_data = #{specData,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=REAL},
+      </if>
+      <if test="wunit != null" >
+        wunit = #{wunit,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null" >
+        volume = #{volume,jdbcType=REAL},
+      </if>
+      <if test="vunit != null" >
+        vUnit = #{vunit,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null" >
+        length = #{length,jdbcType=REAL},
+      </if>
+      <if test="width != null" >
+        width = #{width,jdbcType=REAL},
+      </if>
+      <if test="lunit != null" >
+        lUnit = #{lunit,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null" >
+        height = #{height,jdbcType=REAL},
+      </if>
+      <if test="packageType != null" >
+        package_type = #{packageType,jdbcType=INTEGER},
+      </if>
+      <if test="expdateFlag != null" >
+        expDate_flag = #{expdateFlag,jdbcType=BIT},
+      </if>
+      <if test="expirationDate != null" >
+        expiration_date = #{expirationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="batchnoFlag != null" >
+        batchNo_flag = #{batchnoFlag,jdbcType=BIT},
+      </if>
+      <if test="warmline != null" >
+        warmline = #{warmline,jdbcType=INTEGER},
+      </if>
+      <if test="securityCodeFlag != null" >
+        security_code_flag = #{securityCodeFlag,jdbcType=BIT},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sp_id = #{spId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yigou.model.entity.Sku" >
+    update basis_spxx
+    set name = #{name,jdbcType=VARCHAR},
+      fullname = #{fullname,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      ct_id = #{ctId,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      config = #{config,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      isch = #{isch,jdbcType=VARCHAR},
+      chcd = #{chcd,jdbcType=INTEGER},
+      kc_max = #{kcMax,jdbcType=INTEGER},
+      kc_min = #{kcMin,jdbcType=INTEGER},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      xnsp_profit = #{xnspProfit,jdbcType=REAL},
+      inventory = #{inventory,jdbcType=INTEGER},
+      spec_data = #{specData,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=REAL},
+      wunit = #{wunit,jdbcType=VARCHAR},
+      volume = #{volume,jdbcType=REAL},
+      vUnit = #{vunit,jdbcType=VARCHAR},
+      length = #{length,jdbcType=REAL},
+      width = #{width,jdbcType=REAL},
+      lUnit = #{lunit,jdbcType=VARCHAR},
+      height = #{height,jdbcType=REAL},
+      package_type = #{packageType,jdbcType=INTEGER},
+      expDate_flag = #{expdateFlag,jdbcType=BIT},
+      expiration_date = #{expirationDate,jdbcType=TIMESTAMP},
+      batchNo_flag = #{batchnoFlag,jdbcType=BIT},
+      warmline = #{warmline,jdbcType=INTEGER},
+      security_code_flag = #{securityCodeFlag,jdbcType=BIT},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where sp_id = #{spId,jdbcType=VARCHAR}
+  </update>
+</mapper>

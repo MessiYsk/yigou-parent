@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.9niuw</groupId>
+    <artifactId>yigou-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>yigou-goods</module>
+        <module>yigou-common</module>
+        <module>yigou-eureka-server</module>
+        <module>yigou-zuul</module>
+        <module>yigou-config-server</module>
+        <module>yigou-config-client</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.4.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <!-- 版本配置，用于版本管理 -->
+    <properties>
+        <java.version>1.8</java.version>
+        <commons-lang3.version>3.4</commons-lang3.version>
+        <commons-io.version>2.5</commons-io.version>
+        <commons-collections4.version>4.1</commons-collections4.version>
+        <spring-cloud.version>Dalston.SR1</spring-cloud.version>
+    </properties>
+
+    <!-- 锁定版本 -->
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <!-- Apache Commons -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections4.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <!--<version>Dalston.RC1</version>--> <!-- 该版本的foreign的断路器不能用，需要在application.properties中配置 -->
+                <!--<version>Camden.SR6</version>-->
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+</project>

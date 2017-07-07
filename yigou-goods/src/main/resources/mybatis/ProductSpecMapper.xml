@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yigou.mapper.ProductSpecMapper" >
+  <resultMap id="BaseResultMap" type="com.yigou.model.entity.ProductSpec" >
+    <id column="spec_id" property="specId" jdbcType="INTEGER" />
+    <result column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="dict_id" property="dictId" jdbcType="VARCHAR" />
+    <result column="dict_name" property="dictName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    spec_id, product_id, title, dict_id, dict_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yigou.model.entity.ProductSpecExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_product_spec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_product_spec
+    where spec_id = #{specId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_product_spec
+    where spec_id = #{specId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yigou.model.entity.ProductSpecExample" >
+    delete from tb_product_spec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yigou.model.entity.ProductSpec" useGeneratedKeys="true" keyProperty="specId">
+    insert into tb_product_spec (spec_id, product_id, title, 
+      dict_id, dict_name)
+    values (#{specId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{dictId,jdbcType=VARCHAR}, #{dictName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yigou.model.entity.ProductSpec" useGeneratedKeys="true" keyProperty="specId" >
+    insert into tb_product_spec
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="specId != null" >
+        spec_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="dictId != null" >
+        dict_id,
+      </if>
+      <if test="dictName != null" >
+        dict_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="specId != null" >
+        #{specId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="dictId != null" >
+        #{dictId,jdbcType=VARCHAR},
+      </if>
+      <if test="dictName != null" >
+        #{dictName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yigou.model.entity.ProductSpecExample" resultType="java.lang.Integer" >
+    select count(*) from tb_product_spec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_product_spec
+    <set >
+      <if test="record.specId != null" >
+        spec_id = #{record.specId,jdbcType=INTEGER},
+      </if>
+      <if test="record.productId != null" >
+        product_id = #{record.productId,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictId != null" >
+        dict_id = #{record.dictId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictName != null" >
+        dict_name = #{record.dictName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_product_spec
+    set spec_id = #{record.specId,jdbcType=INTEGER},
+      product_id = #{record.productId,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      dict_id = #{record.dictId,jdbcType=VARCHAR},
+      dict_name = #{record.dictName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yigou.model.entity.ProductSpec" >
+    update tb_product_spec
+    <set >
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="dictId != null" >
+        dict_id = #{dictId,jdbcType=VARCHAR},
+      </if>
+      <if test="dictName != null" >
+        dict_name = #{dictName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where spec_id = #{specId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yigou.model.entity.ProductSpec" >
+    update tb_product_spec
+    set product_id = #{productId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      dict_id = #{dictId,jdbcType=VARCHAR},
+      dict_name = #{dictName,jdbcType=VARCHAR}
+    where spec_id = #{specId,jdbcType=INTEGER}
+  </update>
+</mapper>
