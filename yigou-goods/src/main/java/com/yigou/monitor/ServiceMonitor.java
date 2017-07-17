@@ -1,6 +1,6 @@
 package com.yigou.monitor;
 
-import com.yigou.web.exception.ServerInternalErrorException;
+import com.yigou.exception.ServerInternalErrorException;
 import lombok.extern.apachecommons.CommonsLog;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;

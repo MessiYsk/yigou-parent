@@ -1,6 +1,6 @@
 package com.yigou.util;
 
-import com.yigou.web.exception.ParameterIllegalException;
+import com.yigou.exception.ParameterIllegalException;
 
 /**
  * @author Xiaoyue Xiao

@@ -148,13 +148,6 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Lombok - Make Java look less redundant -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- Apache Commons -->
         <dependency>
             <groupId>org.apache.commons</groupId>

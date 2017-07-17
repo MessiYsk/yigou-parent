@@ -94,4 +94,15 @@ public class TestUtil {
         System.out.println(split.length);
 
     }
+
+    @Test
+    public void test4() {
+
+        String str = "12.00";
+
+        double v = Double.parseDouble(str);
+
+        System.out.println(v);
+
+    }
 }

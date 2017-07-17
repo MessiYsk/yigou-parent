@@ -31,6 +31,8 @@
         <commons-io.version>2.5</commons-io.version>
         <commons-collections4.version>4.1</commons-collections4.version>
         <spring-cloud.version>Dalston.SR1</spring-cloud.version>
+        <springfox-swagger2.version>2.2.2</springfox-swagger2.version>
+        <springfox-swagger-ui.version>2.2.2</springfox-swagger-ui.version>
     </properties>
 
     <!-- 锁定版本 -->
@@ -55,6 +57,16 @@
                 <version>${commons-collections4.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox-swagger2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${springfox-swagger-ui.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
